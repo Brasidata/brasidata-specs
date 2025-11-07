@@ -1,4 +1,4 @@
-[![Brasidata Open Specs](https://img.shields.io/badge/brasidata-specs-active-blue?style=flat-square)](https://github.com/Brasidata/brasidata-specs)
+[![Brasidata Open Specs](https://img.shields.io/badge/Brasidata_Specs-Active-blue?style=flat-square)](https://github.com/Brasidata/brasidata-specs)
 
 # Brasidata Open Specs
 
