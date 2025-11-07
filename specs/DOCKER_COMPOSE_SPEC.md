@@ -1,6 +1,6 @@
 # 🐳 Brasidata Docker Compose Spec
 
-## 📜 Estrutura Geral
+## 📜 General Structure
 
 ```yaml
 version: '3.8'
@@ -26,34 +26,33 @@ networks:
 
 ---
 
-## 🔹 Convenções de Nomenclatura
+## 🔹 Naming Conventions
 
-| Elemento         | Padrão                                    | Exemplo                                   |
-| ---------------- | ----------------------------------------- | ----------------------------------------- |
-| `container_name` | `${PROJECT_NAME:-<context>-<stack>-srvc}` | `${PROJECT_NAME:-database-postgres-srvc}` |
-| `volume`         | `<service>_data`                          | `mongo_data`, `redis_data`                |
-| `network`        | `<project>-network`                       | `obdc-network`, `overleaf-network`        |
-| `env var`        | SCREAMING_SNAKE_CASE                      | `POSTGRES_USER`, `SHARELATEX_MONGO_URL`   |
+| Element         | Pattern                                   | Example                                   |
+|-----------------|--------------------------------------------|-------------------------------------------|
+| `container_name`| `${PROJECT_NAME:-<context>-<stack>-srvc}`  | `${PROJECT_NAME:-database-postgres-srvc}` |
+| `volume`        | `<service>_data`                           | `mongo_data`, `redis_data`                |
+| `network`       | `<project>-network`                        | `obdc-network`, `overleaf-network`        |
+| `env var`       | SCREAMING_SNAKE_CASE                       | `POSTGRES_USER`, `SHARELATEX_MONGO_URL`   |
 
 ---
 
-## 🔹 Padrões de Estilo
+## 🔹 Style Guidelines
 
-* Ordem lógica: **Mongo → Redis → App/Service**
-* Comentários curtos e técnicos
-* Sempre incluir:
-
+* Logical order: **Mongo → Redis → App/Service**
+* Short, technical comments
+* Always include:
   * `restart: unless-stopped`
-  * `healthcheck` com `interval`, `timeout`, `retries`
-  * bloco `networks:` explícito, mesmo que único
-* Variáveis externas controladas via `.env`
-* Evitar **paths absolutos** — usar `../` ou `./data/`
-* Arquivos de compose ficam em `docker-compose/`
-* Usar **compose overrides** (`docker-compose.override.yml`) para ambientes locais.
+  * `healthcheck` with `interval`, `timeout`, `retries`
+  * explicit `networks:` block, even if single
+* External variables controlled via `.env`
+* Avoid absolute paths — use `../` or `./data/`
+* Compose files live in `docker-compose/`
+* Use **compose overrides** (`docker-compose.override.yml`) for local environments.
 
 ---
 
-## 🔹 Template Base (Multi-Service)
+## 🔹 Base Template (Multi-Service)
 
 ```yaml
 version: '3.8'
@@ -104,7 +103,7 @@ networks:
 
 ---
 
-## 🔹 Estrutura de Diretórios Esperada
+## 🔹 Expected Directory Structure
 
 ```
 docker-compose/

@@ -1,75 +1,75 @@
 # 🧱 Brasidata Naming Convention Spec
 
-## 📜 Padrão Geral
+## 📜 General Pattern
 
 ```text
 [namespace]-[context]-[stack]-[type]
 ```
 
-* **kebab-case** (minúsculas, separadas por hífen)
-* sem underscores ou espaços
-* última parte (`type`) define o papel funcional do repositório
-* `namespace` é opcional, usado apenas para famílias de projeto (ex: `obdc-*`)
+* kebab-case (lowercase, hyphen-separated)
+* no underscores or spaces
+* the last part (`type`) defines the repository’s functional role
+* `namespace` is optional, used only for project families (e.g., `obdc-*`)
 
 ---
 
-## 🔹 Segmentos
+## 🔹 Segments
 
-| Segmento    | Obrigatório | Descrição                                                         | Exemplo                                                                         |
-| ----------- | ----------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `namespace` | opcional    | Agrupa módulos sob um ecossistema (OntoBDC, InfoBIM, etc.)        | `obdc-`                                                                         |
-| `context`   | sim         | Define o domínio funcional ou tema principal                      | `database`, `proxy-manager`, `flowcenter`, `ontologies`, `propostas-comerciais` |
-| `stack`     | sim         | Especifica a tecnologia-base ou implementação                     | `postgres`, `mongodb`, `n8n`, `nginx`, `latex`                                  |
-| `type`      | sim         | Natureza do repositório: execução, documentação, biblioteca, etc. | `srvc`, `doc`, `app`, `lib`, `pkg`, `ui`                                        |
-
----
-
-## 🔹 Exemplos Atuais (oficiais)
-
-| Repositório                      | Interpretação                                 |
-| -------------------------------- | --------------------------------------------- |
-| `propostas-comerciais-latex-doc` | documentação de propostas comerciais em LaTeX |
-| `obdc-ontologies-doc`            | documentação das ontologias OntoBDC           |
-| `database-postgres-srvc`         | serviço PostgreSQL                            |
-| `database-mongodb-srvc`          | serviço MongoDB                               |
-| `flowcenter-n8n-srvc`            | serviço de orquestração N8n do FlowCenter     |
-| `proxy-manager-nginx-srvc`       | serviço de proxy reverso com Nginx            |
+| Segment     | Required | Description                                                    | Example                                                                          |
+|-------------|----------|----------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `namespace` | optional | Groups modules under an ecosystem (OntoBDC, InfoBIM, etc.)    | `obdc-`                                                                          |
+| `context`   | yes      | Defines the functional domain or main theme                    | `database`, `proxy-manager`, `flowcenter`, `ontologies`, `propostas-comerciais`  |
+| `stack`     | yes      | Specifies the base technology or implementation                | `postgres`, `mongodb`, `n8n`, `nginx`, `latex`                                   |
+| `type`      | yes      | Repository nature: runtime, documentation, library, etc.       | `srvc`, `doc`, `app`, `lib`, `pkg`, `ui`                                         |
 
 ---
 
-## 🔹 Regex de Validação
+## 🔹 Current Official Examples
+
+| Repository                      | Interpretation                                  |
+|---------------------------------|--------------------------------------------------|
+| `propostas-comerciais-latex-doc`| documentation for commercial proposals in LaTeX  |
+| `obdc-ontologies-doc`           | documentation of OntoBDC ontologies              |
+| `database-postgres-srvc`        | PostgreSQL service                               |
+| `database-mongodb-srvc`         | MongoDB service                                  |
+| `flowcenter-n8n-srvc`           | N8n orchestration service for FlowCenter         |
+| `proxy-manager-nginx-srvc`      | reverse proxy service using Nginx                |
+
+---
+
+## 🔹 Validation Regex
 
 ```regex
 ^([a-z0-9]+-){1,3}[a-z0-9]+-(srvc|doc|app|lib|pkg|ui)$
 ```
 
-✅ Aceita até 4 blocos antes do sufixo
-✅ Garante o tipo final válido
-✅ Bloqueia uso de maiúsculas e underscores
+✅ Accepts up to 4 blocks before the suffix  
+✅ Ensures the final type is valid  
+✅ Blocks uppercase letters and underscores
 
 ---
 
-## 🔹 Convenções e Boas Práticas
+## 🔹 Conventions and Best Practices
 
-* Prefixos opcionais de namespace (`obdc-`, `infobim-`, `infra-`) devem refletir **ecossistemas semânticos**.
-* Evite nomes genéricos: use contextos explícitos (`proxy-manager`, não apenas `proxy`).
-* Se houver componentes homônimos (ex: `flowcenter` em backend e frontend), diferencie com `-srvc` / `-ui`.
-* Documentações de projeto usam `-doc` e devem conter um README descritivo do domínio, stack e versão da ontologia ou serviço.
-* Tags de versão (`vX.Y.Z`) só são aplicadas a releases, nunca no nome do repositório.
-
----
-
-## 🔹 Padrão de Licenciamento
-
-**MIT License** (padrão Brasidata)
-
-> Permite uso, cópia, modificação, distribuição e sublicenciamento, inclusive comercialmente, desde que o aviso de copyright e a licença original sejam mantidos.
-
-Repositórios que dependam de componentes **GPL** ou **AGPL** devem declarar isso explicitamente no cabeçalho do README, sem alterar o nome do repositório.
+* Optional namespace prefixes (`obdc-`, `infobim-`, `infra-`) should reflect semantic ecosystems.
+* Avoid generic names: use explicit contexts (`proxy-manager`, not just `proxy`).
+* If there are homonymous components (e.g., `flowcenter` in backend and frontend), differentiate with `-srvc` / `-ui`.
+* Project documentation uses `-doc` and must include a README describing the domain, stack, and the ontology or service version.
+* Version tags (`vX.Y.Z`) apply only to releases, never in the repository name.
 
 ---
 
-## 🔹 Exemplo de Hierarquia Esperada
+## 🔹 Licensing Standard
+
+**MIT License** (Brasidata default)
+
+> Allows use, copy, modification, distribution, and sublicensing, including commercially, provided the copyright notice and the original license are retained.
+
+Repositories depending on **GPL** or **AGPL** components must explicitly declare this in the README header, without changing the repository name.
+
+---
+
+## 🔹 Example of Expected Hierarchy
 
 ```text
 Brasidata/
