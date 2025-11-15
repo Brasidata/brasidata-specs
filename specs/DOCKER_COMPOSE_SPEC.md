@@ -3,8 +3,6 @@
 ## 📜 General Structure
 
 ```yaml
-version: '3.8'
-
 services:
   <service-name>:
     image: <image>:<tag>
@@ -49,14 +47,13 @@ networks:
 * Avoid absolute paths — use `../` or `./data/`
 * Compose files live in `docker-compose/`
 * Use **compose overrides** (`docker-compose.override.yml`) for local environments.
+* Omitir a chave `version` no Compose — utilizar a Compose Specification atual.
 
 ---
 
 ## 🔹 Base Template (Multi-Service)
 
 ```yaml
-version: '3.8'
-
 services:
   # Database service
   postgres:
@@ -99,6 +96,35 @@ volumes:
 networks:
   brasidata-network:
     driver: bridge
+```
+
+---
+
+## 🔹 Minimal Template (Clean)
+
+```yaml
+services:
+  espocrm-web:
+    image: ${ESPOCRM_IMAGE_NAME:-espocrm/espocrm}:${ESPOCRM_IMAGE_TAG:-latest}
+    build:
+      context: ../src
+      dockerfile: ../docker-compose/manifests/dev.Dockerfile
+    container_name: espocrm-web
+    ports:
+      - "${PORT:-8080}:80"
+    networks:
+      - ${NETWORK_NAME:-espocrm-network}
+    environment:
+      - ESPOCRM_DATABASE_PLATFORM=${ESPOCRM_DB_PLATFORM:-Postgresql}
+      - ESPOCRM_DATABASE_HOST=postgres
+      - ESPOCRM_DATABASE_USER=${POSTGRES_USER}
+      - ESPOCRM_DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - ESPOCRM_ADMIN_USERNAME=${ESPOCRM_ADMIN_USERNAME}
+      - ESPOCRM_ADMIN_PASSWORD=${ESPOCRM_ADMIN_PASSWORD}
+      - ESPOCRM_SITE_URL=${ESPOCRM_SITE_URL:-http://localhost:${PORT:-8080}}
+      - TZ=${TZ:-America/Sao_Paulo}
+    volumes:
+      - ../src:/var/www/html
 ```
 
 ---
